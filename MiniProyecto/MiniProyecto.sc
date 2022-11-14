@@ -37,9 +37,11 @@ calculoError(0.785398, simpson1tercio(0, 1, f7))
 
 //                                  Simpson Compuesta
 def simpsonCompuesta(a : Int, b : Int, n : Int, f : Double => Double) = {
-  val h = 1.0 * (b-a) / n
+  val h = ((1.0 * (b-a)) / n)
   val xsubj = (j : Double) => (a + (j*h))
-  val funcionDentro = (j : Double) => ( f( xsubj (2*j-2) ) + 4*f( xsubj (2*j-1)) + f( xsubj (2*j)) )
+
+  val funcionDentro = (j : Double) => ( f( xsubj ((2*j) - 2) ) + 4*f( xsubj ((2*j)-1) ) + f( xsubj (2*j) ) )
+
   (h/3) * (1 to n/2).map(funcionDentro(_)).sum
 }
 
@@ -63,20 +65,35 @@ calculoError(0.785398, simpsonCompuesta(0, 1, 10, f7))
 
 
 //                                  Simpson Extendida
+def simpsonExtendida(a : Int, b : Int, f : Double => Double) = {
+  val n = (2 * (b-a))
+  val h = ((b-a) / (n * 1.0))
 
+  val funcionSumPar = (j : Double) => ( f( a + (j*h)) )
+  val resultadoPar = (2 * (2 to n-2 by 2).map(funcionSumPar(_)).sum)
 
+  val funcionSumImpar = (i : Double) => ( f( a + (i*h)) )
+  val resultadoImpar = (4 * (1 to n-1 by 2).map(funcionSumImpar(_)).sum)
 
+  val resultadoFunciones = ( f(a) + resultadoPar + resultadoImpar + f(b))
 
+  (h/3) * resultadoFunciones
+}
 
+//Resultados
+simpsonExtendida(3, 5, f1)
+simpsonExtendida(0, 2, f2)
+simpsonExtendida(-1, 1, f3)
+simpsonExtendida(1, 2, f4)
+simpsonExtendida(0, 1, f5)
+simpsonExtendida(2, 3, f6)
+simpsonExtendida(0, 1, f7)
 
-
-
-
-
-
-
-
-
-
-
-
+//Calculo error
+calculoError(7.33, simpsonExtendida(3, 5, f1))
+calculoError(8, simpsonExtendida(0, 2, f2))
+calculoError(3.333, simpsonExtendida(-1, 1, f3))
+calculoError(1.09861, simpsonExtendida(1, 2, f4))
+calculoError(1.71828, simpsonExtendida(0, 1, f5))
+calculoError(0.828427, simpsonExtendida(2, 3, f6))
+calculoError(0.785398, simpsonExtendida(0, 1, f7))
