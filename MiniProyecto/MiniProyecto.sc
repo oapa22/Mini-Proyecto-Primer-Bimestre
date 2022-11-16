@@ -26,7 +26,7 @@ simpson1tercio(0, 1, f5)
 simpson1tercio(2, 3, f6)
 simpson1tercio(0, 1, f7)
 
-//Calculo error
+//Cálculo error
 calculoError(7.33, simpson1tercio(3, 5, f1))
 calculoError(8, simpson1tercio(0, 2, f2))
 calculoError(3.333, simpson1tercio(-1, 1, f3))
@@ -36,7 +36,7 @@ calculoError(0.828427, simpson1tercio(2, 3, f6))
 calculoError(0.785398, simpson1tercio(0, 1, f7))
 
 
-//                                  Simpson Compuesta
+//                                  Simpson 1/3 Compuesta
 def simpsonCompuesta(a : Int, b : Int, n : Int, f : Double => Double) = {
   val h = (1.0 * (b-a)) / n
   val xsubj = (j : Double) => a + (j*h)
@@ -55,7 +55,7 @@ simpsonCompuesta(0, 1, 1000, f5)
 simpsonCompuesta(2, 3, 1000, f6)
 simpsonCompuesta(0, 1, 1000, f7)
 
-//Calculo error
+//Cálculo error
 calculoError(7.33, simpsonCompuesta(3, 5, 1000, f1))
 calculoError(8, simpsonCompuesta(0, 2, 1000, f2))
 calculoError(3.333, simpsonCompuesta(-1, 1, 1000, f3))
@@ -65,7 +65,7 @@ calculoError(0.828427, simpsonCompuesta(2, 3, 1000, f6))
 calculoError(0.785398, simpsonCompuesta(0, 1, 1000, f7))
 
 
-//                                  Simpson Extendida
+//                                  Simpson 1/3 Extendida
 def simpsonExtendida(a : Int, b : Int, f : Double => Double) = {
   val n = 2 * (b-a)
   val h = (b-a) / (n * 1.0)
@@ -88,7 +88,7 @@ simpsonExtendida(0, 1, f5)
 simpsonExtendida(2, 3, f6)
 simpsonExtendida(0, 1, f7)
 
-//Calculo error
+//Cálculo error
 calculoError(7.33, simpsonExtendida(3, 5, f1))
 calculoError(8, simpsonExtendida(0, 2, f2))
 calculoError(3.333, simpsonExtendida(-1, 1, f3))
